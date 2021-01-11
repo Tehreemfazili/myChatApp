@@ -7,4 +7,7 @@
     <string name="welcome_to_my_chat">WELCOME TO MY CHAT</string>
     <string name="welcome">Welcome</string>
     <string name="login">LOGIN</string>
+    <string name="empty_username_error">Please enter username</string>
+    <string name="empty_password_error">Please enter password</string>
+    <string name="empty_confirm_password_error">Please enter password again</string>
 </resources>
