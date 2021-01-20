@@ -1,12 +1,14 @@
 package com.example.chatapp
 
+import android.content.Intent
 import android.os.Bundle
 import com.example.chatapp.databinding.ActivityLoginBinding
+import com.google.firebase.auth.FirebaseAuth
 
 
-class LoginActivity : BaseActivity(){
+class LoginActivity : BaseActivity() {
 
-    private val binding : ActivityLoginBinding by lazy {
+    private val binding: ActivityLoginBinding by lazy {
         ActivityLoginBinding.inflate(layoutInflater)
     }
 
@@ -18,18 +20,43 @@ class LoginActivity : BaseActivity(){
         init()
     }
 
-    private fun init(){
-        binding.tvLogin.setOnClickListener {
+    private fun init() {
 
+        binding.tvLogin.setOnClickListener {
+            if (validate()) {
+
+                val email = binding.etEmail.text.toString()
+                val password = binding.etPassword.text.toString()
+
+                val auth = FirebaseAuth.getInstance()
+                auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+                    if (!it.isSuccessful) {
+                        return@addOnCompleteListener
+                    }
+
+                    startActivity(
+                        Intent(
+                            this,
+                            MainActivity::class.java
+                        ).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                            .addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                    )
+
+                }
+            }
+        }
+
+        binding.tvCreateAccount.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
         }
     }
 
 
-    private fun validate() : Boolean {
+    private fun validate(): Boolean {
         when {
-            binding.etUsername.text.isNullOrEmpty() -> {
-                binding.tilUsername.setErrorMessage(getString(R.string.empty_username_error))
-                binding.etUsername.requestFocus()
+            binding.etEmail.text.isNullOrEmpty() -> {
+                binding.tilEmail.setErrorMessage(getString(R.string.empty_email_error))
+                binding.etEmail.requestFocus()
                 return false
             }
             binding.etPassword.text.isNullOrEmpty() -> {
