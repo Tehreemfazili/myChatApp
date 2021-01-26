@@ -2,6 +2,8 @@ package com.example.chatapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import com.example.chatapp.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -32,7 +34,15 @@ class LoginActivity : BaseActivity() {
                 auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                     if (!it.isSuccessful) {
                         return@addOnCompleteListener
+                        binding.progressBar.visibility = View.VISIBLE
+                        binding.tvLogin.visibility = View.GONE
                     }
+                    else{
+                        Toast.makeText(this,"No user found", Toast.LENGTH_LONG).show()
+                    }
+
+                    binding.progressBar.visibility = View.GONE
+                    binding.tvLogin.visibility = View.VISIBLE
 
                     startActivity(
                         Intent(

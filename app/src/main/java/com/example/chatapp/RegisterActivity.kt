@@ -1,9 +1,8 @@
 package com.example.chatapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.view.isEmpty
+import androidx.appcompat.app.AppCompatActivity
 import com.example.chatapp.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -50,7 +49,7 @@ class RegisterActivity : AppCompatActivity() {
             users["username"] = username
             users["imageUrl"] = "default"
 
-            reference.setValue(users).addOnCompleteListener { it ->
+            reference.setValue(users).addOnCompleteListener {
                 if (!it.isSuccessful) {
                     return@addOnCompleteListener
                 }
@@ -88,7 +87,7 @@ class RegisterActivity : AppCompatActivity() {
                 binding.etConfirmPassword.requestFocus()
                 return false
             }
-            binding.etPassword.text.toString() == binding.etConfirmPassword.text.toString() -> {
+            binding.etPassword.text.toString() != binding.etConfirmPassword.text.toString() -> {
                 binding.tilConfirmPassword.setErrorMessage(getString(R.string.password_doesnt_match_error))
                 binding.etConfirmPassword.requestFocus()
                 return false

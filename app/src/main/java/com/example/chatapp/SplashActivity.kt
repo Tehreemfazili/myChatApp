@@ -1,7 +1,7 @@
 package com.example.chatapp
 
 import android.os.Bundle
-import com.google.firebase.ktx.Firebase
+
 //import com.google.firebase.messaging.FirebaseMessaging
 
 class SplashActivity : BaseActivity(){
@@ -10,15 +10,6 @@ class SplashActivity : BaseActivity(){
 
     }
 
-    init {
-//        FirebaseMessaging.getInstance().token.addOnCompleteListener {
-//            if(!it.isSuccessful){
-//                return@addOnCompleteListener
-//            }
-//
-//            val token = it.result
-//
-//        }
 
-    }
+
 }
